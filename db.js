@@ -1,24 +1,19 @@
+
 const mongoClient = require("mongodb").MongoClient;
-
 mongoClient.connect("mongodb://localhost:27017",
-                     {useUnifiedTopology: true},
-                     (error, connection)=> {
-                         if(error) return console.log(error);
-                         global.connection = connection.db("teste");
-                         console.log("conectou");
-                         //global.connection.collection("produtos").find({}).toArray();
+                     {useUnifiedTopology: true})
+            .then(connection => {
+                  global.connection = connection.db("reserva");
+                  console.log("connected!");
+            })
+            .catch(error => console.log(error));
 
-
-                     });
-
-//module.exports{};
-
-
-function buscaPedidos() {
-  return global.connection.collection("produtos")
+function findCustomers() {
+   return global.connection.collection("reserva")
                           .find({})
                           .toArray(); 
     
 }
 
-module.exports = {buscaPedidos}
+module.exports = {findCustomers}
+//module.exports = {}
