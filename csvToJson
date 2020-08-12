@@ -1,0 +1,15 @@
+
+//https://www.npmjs.com/package/csvtojson
+//'use strict';
+const csvtojson = require('csvtojson')
+const fs = require('fs')
+const csvfilepath = "source.csv"
+
+csvtojson()
+.fromFile(csvfilepath)
+.then((jsonObj) =>{
+    console.log(jsonObj);
+
+    fs.writeFileSync("output.txt", JSON.stringify(jsonObj), 'utf8',
+    function(err){console.log(err);});
+})
